@@ -1,4 +1,4 @@
-I"�<h2 id="this-is-my-first-article-in-blog">This is my first article in blog</h2>
+I"<h2 id="this-is-my-first-article-in-blog">This is my first article in blog</h2>
 
 <h4 id="什么是事件委托">什么是事件委托?</h4>
 
@@ -9,8 +9,7 @@
 <p><strong>1.原理:</strong> 事件冒泡</p>
 
 <ul>
-  <li>当元素的事件被触发后，所有的父级元素的同名事件会被依次触发,子元素 -&gt; 父元素 -&gt; body -&gt; html -&gt; document -&gt; window,IE8 和之前的浏览器只到 document
-<img src="https://toddlovediane.github.io/toddwy.github.io//assets/img/we-in-rest.jpg" alt="I and My friends" /></li>
+  <li>当元素的事件被触发后，所有的父级元素的同名事件会被依次触发,子元素 -&gt; 父元素 -&gt; body -&gt; html -&gt; document -&gt; window,IE8 和之前的浏览器只到 document</li>
 </ul>
 
 <p><strong>2.优点:</strong></p>
@@ -21,7 +20,7 @@
   <li>在页面中设置事件处理程序的事件更少,所需要引用的 DOM 更少,时间更短.</li>
 </ul>
 
-<p><img src="https://toddlovediane.github.io/toddwy.github.io//assets/img/carbon.png" alt="I and My friends" /></p>
+<p><img src="https://toddlovediane.github.io/toddwy.github.io//assets/img/carbon.png" alt="code area" /></p>
 
 <blockquote>
   <p>这是一条引用哦 请看清楚吧</p>
