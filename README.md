@@ -1,11 +1,10 @@
 
 ## Demo
-
-Check the theme in action [Demo](https://ToddLoveDiane.github.io/toddwy.github.io/)
+This is my first page
 
 The main page would look like this:
 
-![Main page preview](https://github.com/ToddLoveDiane/toddwy.github.io/blob/master/assets/img/home-page.jpg?raw=true)
+![Main page preview](https://github.com/ToddLoveDiane/toddwy.github.io/blob/master/assets/img/shouye.png?raw=true)
 
 The post page would look like this:
 
