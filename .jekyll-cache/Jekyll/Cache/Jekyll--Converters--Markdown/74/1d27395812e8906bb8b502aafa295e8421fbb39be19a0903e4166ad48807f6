@@ -1,0 +1,128 @@
+I"<h2 id="这是我在markdown上编写然后直接转到页面的一段">这是我在markdown上编写然后直接转到页面的一段</h2>
+
+<h4 id="什么是事件委托">什么是事件委托?</h4>
+<p>对”事件处理程序过多”问题的<strong>解决方案</strong>,就是需要触发子事件时,只用给某父元素指定一个事件处理程序,就可以管理某一类型的所有事件.</p>
+<h4 id="事件委托的原理和优点">事件委托的原理和优点?</h4>
+
+<p><strong>1.原理:</strong>   事件冒泡</p>
+<ul>
+  <li>当元素的事件被触发后，所有的父级元素的同名事件会被依次触发,子元素 -&gt; 父元素 -&gt; body -&gt; html -&gt; document -&gt; window,IE8和之前的浏览器只到document</li>
+</ul>
+
+<p><strong>2.优点:</strong></p>
+<ul>
+  <li>整个页面占用的内存更少,能够提升整体性能</li>
+  <li>document对象能很快被访问,而且在页面生命周期的任何时间点为它添加事件处理程序(无需等待DOMContentLoaded或者load事件),换句话说:只要可单击的元素呈现在页面当中,就可以立即获得适当的功能</li>
+  <li>在页面中设置事件处理程序的事件更少,所需要引用的DOM更少,时间更短.</li>
+</ul>
+
+<h4 id="用途">用途</h4>
+<p><strong>1.多个元素注册同一事件时</strong></p>
+
+<p>例:比如给下列每一个li元素注册一个点击事件</p>
+
+<p><strong>原始</strong>写法,循环遍历注册(数据一多就会消耗大量的内存)</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;ul id='ul'&gt;
+        &lt;li&gt;1&lt;/li&gt;
+        &lt;li&gt;2&lt;/li&gt;
+        &lt;li&gt;3&lt;/li&gt;
+        &lt;li&gt;4&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;script&gt;
+        var liList = document.getElementsByTagName('li');
+        for (var i = 0; i &lt; liList.length; i++) {
+            liList[i].onclick = function () {
+                alert(this.innerHTML)
+            }
+        }
+    &lt;/script&gt;
+</code></pre></div></div>
+<p><strong>采用事件委托,只需要给li的父元素注册点击事件即可</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        document.getElementById('ul').onclick = function (e) {
+            //事件的兼容性代码
+            e = e || window.event;
+            //e.target就是li
+            console.log(e.target.innerHTML);
+        }
+</code></pre></div></div>
+<p>target:可返回触发该事件的节点,如生成事件的元素、文档或窗口等
+event.target.nodeName  　     //获取事件触发元素标签name（li,p…）
+event.target.id　　　　　　 //获取事件触发元素id
+event.target.className　　//获取事件触发元素classname
+event.target.innerHTML　　//获取事件触发元素的内容（li）
+####若ul有其他的元素不用注册点击事件,怎么做?
+使用e.target做判断筛选即可
+<strong>**
+**2.动态添加属性</strong></p>
+
+<p>例:设置一个新增Li标签的按钮,并为其注册点击事件</p>
+
+<p><strong>原始的循环遍历并不能为新增的标签增加事件</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;ul id='ul'&gt;
+        &lt;li&gt;1&lt;/li&gt;
+        &lt;li&gt;2&lt;/li&gt;
+        &lt;li&gt;3&lt;/li&gt;
+        &lt;li&gt;4&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;button id="btn"&gt;
+        点我有惊喜
+    &lt;/button&gt;
+    &lt;script&gt;
+        var ul = document.getElementById('ul')
+        var liList = document.getElementsByTagName('li');
+        for (var i = 0; i &lt; liList.length; i++) {
+            liList[i].onclick = function () {
+                alert(this.innerHTML)
+            }
+        }
+        document.getElementById('btn').onclick = function(){
+            let li = document.createElement('li');
+            li.innerHTML = '欢迎来到德莱联盟';
+            ul.appendChild(li);
+        }
+    &lt;/script&gt;
+</code></pre></div></div>
+<p><strong>事件委托:后续添加的每一个li都有点击事件</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;ul id='ul'&gt;
+        &lt;li&gt;1&lt;/li&gt;
+        &lt;li&gt;2&lt;/li&gt;
+        &lt;li&gt;3&lt;/li&gt;
+        &lt;li&gt;4&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;button id="btn"&gt;
+        点我有惊喜
+    &lt;/button&gt;
+    &lt;script&gt;
+        var ul = document.getElementById('ul')
+        ul.onclick = function (e) {
+            //事件的兼容性代码
+            e = e || window.event;
+            //e.target就是li
+            console.log(e.target.innerHTML);
+        }
+        ul.onclick = function(){
+            let li = document.createElement('li');
+            li.innerHTML = '欢迎来到德莱联盟';
+            ul.appendChild(li);
+        }
+    &lt;/script&gt;
+</code></pre></div></div>
+<hr />
+<p><strong>最适合事件委托技术的事件有:</strong></p>
+<ul>
+  <li><strong>click</strong></li>
+  <li><strong>mousedown</strong></li>
+  <li><strong>mouseup</strong></li>
+  <li><strong>keyup</strong></li>
+  <li><strong>keydown</strong></li>
+</ul>
+
+<p>虽然mouseover和mouseout也有事件冒泡,但要适当处理它们并不容易,因为需要经常计算元素的位置(在移入移出时)
+<em>**</em>
+####jQuery的事件委托语法</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        //$('父元素').on('事件名','子元素触发',事件触发时的回调函数);
+        $('ul').on('click','li',function(e){
+            console.log(e.target.innerHTML);
+        })
+</code></pre></div></div>
+:ET
