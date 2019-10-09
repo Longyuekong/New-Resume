@@ -3,7 +3,7 @@ layout: post
 title: First Personal Blog Post 
 date: 2019-10-09 00:00:00 +0300
 description: You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. # Add post description (optional)
-img: software.jpg # Add image post (optional)
+img: fengjing.jpg # Add image post (optional)
 tags: [Productivity, Software] # add tag
 ---
 
@@ -18,7 +18,6 @@ tags: [Productivity, Software] # add tag
 **1.原理:** 事件冒泡
 
 - 当元素的事件被触发后，所有的父级元素的同名事件会被依次触发,子元素 -> 父元素 -> body -> html -> document -> window,IE8 和之前的浏览器只到 document
-![I and My friends]({{site.baseurl}}/assets/img/we-in-rest.jpg)
 
 **2.优点:**
 
@@ -26,7 +25,7 @@ tags: [Productivity, Software] # add tag
 - document 对象能很快被访问,而且在页面生命周期的任何时间点为它添加事件处理程序(无需等待 DOMContentLoaded 或者 load 事件),换句话说:只要可单击的元素呈现在页面当中,就可以立即获得适当的功能
 - 在页面中设置事件处理程序的事件更少,所需要引用的 DOM 更少,时间更短.
 
-![I and My friends]({{site.baseurl}}/assets/img/carbon.png)
+![code area]({{site.baseurl}}/assets/img/carbon.png)
 
 > 这是一条引用哦 请看清楚吧
 
