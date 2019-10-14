@@ -1,14 +1,13 @@
 
 ## Demo
-This is my first page
+这是我的个人博客
 
 The main page would look like this:
 
 ![Main page preview](https://github.com/ToddLoveDiane/toddwy.github.io/blob/master/assets/img/shouye.png?raw=true)
 
-The post page would look like this:
 
-![Post page preview](https://github.com/ToddLoveDiane/toddwy.github.io/blob/master/assets/img/post-example.jpg?raw=true)
+
 
 ## Features
 
