@@ -1,0 +1,204 @@
+I"	G<h1 id="前言"><strong>前言</strong></h1>
+
+<p>对 Vue 框架中一些重要的特性、框架的原理以问题的形式进行整理汇总，对自己有一定的启发思考,对缺漏之处进行弥补，对 Vue 有更好的掌握。</p>
+
+<h2 id="1vue-的父组件和子组件生命周期钩子函数执行顺序"><strong>1、Vue 的父组件和子组件生命周期钩子函数执行顺序？</strong></h2>
+
+<p>Vue 的父组件和子组件生命周期钩子函数执行顺序可以归类为以下 4 部分：</p>
+
+<ul>
+  <li>
+    <p>加载渲染过程</p>
+
+    <p>父 beforeCreate -&gt; 父 created -&gt; 父 beforeMount -&gt; 子 beforeCreate -&gt; 子 created -&gt; 子 beforeMount -&gt; 子 mounted -&gt; 父 mounted</p>
+  </li>
+  <li>
+    <p>子组件更新过程</p>
+
+    <p>父 beforeUpdate -&gt; 子 beforeUpdate -&gt; 子 updated -&gt; 父 updated</p>
+  </li>
+  <li>
+    <p>父组件更新过程</p>
+
+    <p>父 beforeUpdate -&gt; 父 updated</p>
+  </li>
+  <li>
+    <p>销毁过程</p>
+
+    <p>父 beforeDestroy -&gt; 子 beforeDestroy -&gt; 子 destroyed -&gt; 父 destroyed</p>
+  </li>
+</ul>
+
+<h2 id="2在哪个生命周期内调用异步请求在什么阶段才能访问操作dom">2、<strong>在哪个生命周期内调用异步请求？</strong>在什么阶段才能访问操作DOM？</h2>
+
+<p>可以在钩子函数 created、beforeMount、mounted 中进行调用，因为在这三个钩子函数中，data 已经创建，可以将服务端端返回的数据进行赋值。但是本人推荐在 created 钩子函数中调用异步请求，因为在 created 钩子函数中调用异步请求有以下优点：</p>
+
+<ul>
+  <li>能更快获取到服务端数据，减少页面 loading 时间；</li>
+  <li>ssr 不支持 beforeMount 、mounted 钩子函数，所以放在 created 中有助于一致性；</li>
+</ul>
+
+<p>在钩子函数 <strong>mounted</strong> 被调用前，Vue 已经将编译好的模板挂载到页面上，所以在 <strong>mounted</strong> 中可以访问操作 DOM。</p>
+
+<h2 id="3谈谈你对-keep-alive-的了解">3、<strong>谈谈你对 keep-alive 的了解？</strong></h2>
+
+<p>keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状态，避免重新渲染 ，其有以下特性：</p>
+
+<ul>
+  <li>一般结合路由和动态组件一起使用，用于缓存组件；</li>
+  <li>提供 include 和 exclude 属性，两者都支持字符串或正则表达式， include 表示只有名称匹配的组件会被缓存，exclude 表示任何名称匹配的组件都不会被缓存 ，其中 exclude 的优先级比 include 高；</li>
+  <li>对应两个钩子函数 activated 和 deactivated ，当组件被激活时，触发钩子函数 activated，当组件被移除时，触发钩子函数 deactivated。</li>
+</ul>
+
+<h2 id="4vue-组件间通信有哪几种方式">4、<strong>Vue 组件间通信有哪几种方式？</strong></h2>
+
+<p>Vue 组件间通信是面试常考的知识点之一，这题有点类似于开放题，你回答出越多方法当然越加分，表明你对 Vue 掌握的越熟练。Vue 组件间通信只要指以下 3 类通信：父子组件通信、隔代组件通信、兄弟组件通信，下面我们分别介绍每种通信方式且会说明此种方法可适用于哪类组件间通信。</p>
+
+<p><strong>（1）props / $emit 适用 父子组件通信</strong></p>
+
+<p>这种方法是 Vue 组件的基础，相信大部分同学耳闻能详，所以此处就不举例展开介绍。</p>
+
+<p><strong>（2）ref 与 $parent / $children 适用 父子组件通信</strong></p>
+
+<ul>
+  <li><code class="highlighter-rouge">ref</code>：如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；如果用在子组件上，引用就指向组件实例</li>
+  <li><code class="highlighter-rouge">$parent</code> / <code class="highlighter-rouge">$children</code>：访问父 / 子实例</li>
+</ul>
+
+<p><strong>（3）EventBus （$emit / $on） 适用于 父子、隔代、兄弟组件通信</strong></p>
+
+<p>这种方法通过一个空的 Vue 实例作为中央事件总线（事件中心），用它来触发事件和监听事件，从而实现任何组件间的通信，包括父子、隔代、兄弟组件。</p>
+
+<p><strong>（4）$attrs/$listeners 适用于 隔代组件通信</strong></p>
+
+<ul>
+  <li><code class="highlighter-rouge">$attrs</code>：包含了父作用域中不被 prop 所识别 (且获取) 的特性绑定 ( class 和 style 除外 )。当一个组件没有声明任何 prop 时，这里会包含所有父作用域的绑定 ( class 和 style 除外 )，并且可以通过 <code class="highlighter-rouge">v-bind="$attrs"</code> 传入内部组件。通常配合 inheritAttrs 选项一起使用。</li>
+  <li><code class="highlighter-rouge">$listeners</code>：包含了父作用域中的 (不含 .native 修饰器的) v-on 事件监听器。它可以通过 <code class="highlighter-rouge">v-on="$listeners"</code> 传入内部组件</li>
+</ul>
+
+<p><strong>（5）provide / inject 适用于 隔代组件通信</strong></p>
+
+<p>祖先组件中通过 provider 来提供变量，然后在子孙组件中通过 inject 来注入变量。 provide / inject API 主要解决了跨级组件间的通信问题，不过它的使用场景，主要是子组件获取上级组件的状态，跨级组件间建立了一种主动提供与依赖注入的关系。</p>
+
+<p><strong>（6）Vuex 适用于 父子、隔代、兄弟组件通信</strong></p>
+
+<p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。每一个 Vuex 应用的核心就是 store（仓库）。“store” 基本上就是一个容器，它包含着你的应用中大部分的状态 ( state )。</p>
+
+<p>（1）Vuex 的状态存储是响应式的。当 Vue 组件从 store 中读取状态的时候，若 store 中的状态发生变化，那么相应的组件也会相应地得到高效更新。</p>
+
+<p>（2）改变 store 中的状态的唯一途径就是显式地提交 (commit) mutation。这样使得我们可以方便地跟踪每一个状态的变化。</p>
+
+<p>主要包括以下几个模块：</p>
+
+<ul>
+  <li>State：定义了应用状态的数据结构，可以在这里设置默认的初始状态。</li>
+  <li>Getter：允许组件从 Store 中获取数据，mapGetters 辅助函数仅仅是将 store 中的 getter 映射到局部计算属性。</li>
+  <li>Mutation：是唯一更改 store 中状态的方法，且必须是同步函数。</li>
+  <li>Action：用于提交 mutation，而不是直接变更状态，可以包含任意异步操作。</li>
+  <li>Module：允许将单一的 Store 拆分为多个 store 且同时保存在单一的状态树中。</li>
+</ul>
+
+<h2 id="5vue-是如何实现数据双向绑定的"><strong>5、</strong>Vue 是如何实现数据双向绑定的？<em>**</em></h2>
+
+<p>Vue 数据双向绑定主要是指：数据变化更新视图，视图变化更新数据，如下图所示：</p>
+
+<p><img src="/assets/img/shuangxiang.png" alt="code area" /></p>
+
+<p>即：</p>
+
+<ul>
+  <li>输入框内容变化时，Data 中的数据同步变化。即 View =&gt; Data 的变化。</li>
+  <li>Data 中的数据变化时，文本节点的内容同步变化。即 Data =&gt; View 的变化。</li>
+</ul>
+
+<p>其中，View 变化更新 Data ，可以通过事件监听的方式来实现，所以 Vue 的数据双向绑定的工作主要是如何根据 Data 变化更新 View。</p>
+
+<p>Vue 主要通过以下 4 个步骤来实现数据双向绑定的：</p>
+
+<p>实现一个监听器 Observer：对数据对象进行遍历，包括子属性对象的属性，利用 Object.defineProperty() 对属性都加上 setter 和 getter。这样的话，给这个对象的某个值赋值，就会触发 setter，那么就能监听到了数据变化。</p>
+
+<p>实现一个解析器 Compile：解析 Vue 模板指令，将模板中的变量都替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，调用更新函数进行数据更新。</p>
+
+<p>实现一个订阅者 Watcher：Watcher 订阅者是 Observer 和 Compile 之间通信的桥梁 ，主要的任务是订阅 Observer 中的属性值变化的消息，当收到属性值变化的消息时，触发解析器 Compile 中对应的更新函数。</p>
+
+<p>实现一个订阅器 Dep：订阅器采用 发布-订阅 设计模式，用来收集订阅者 Watcher，对监听器 Observer 和 订阅者 Watcher 进行统一管理。</p>
+
+<p><img src="/assets/img/shuangxiang1.png" alt="code area" /></p>
+
+<h2 id="6vue-框架怎么实现对象和数组的监听">6、<strong>Vue 框架怎么实现对象和数组的监听？</strong></h2>
+
+<p>如果被问到 Vue 怎么实现数据双向绑定，大家肯定都会回答 通过 Object.defineProperty() 对数据进行劫持，但是 Object.defineProperty() 只能对属性进行数据劫持，不能对整个对象进行劫持，同理无法对数组进行劫持，但是我们在使用 Vue 框架中都知道，Vue 能检测到对象和数组（部分方法的操作）的变化，那它是怎么实现的呢？我们查看相关代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">  <span class="sr">/**
+   * Observe a list of Array items.
+      */</span>
+
+    <span class="n">observeArray</span> <span class="p">(</span><span class="ss">items: </span><span class="no">Array</span><span class="o">&lt;</span><span class="n">any</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="n">let</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">items</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">l</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">observe</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="o">/</span><span class="sr">/ observe 功能为监测数据的变化
+    }
+  }
+
+  /</span><span class="o">**</span>
+   <span class="o">*</span> <span class="err">对属性进行递归遍历</span>
+      <span class="o">*</span><span class="sr">/
+
+    let childOb = !shallow &amp;&amp; observe(val) /</span><span class="o">/</span> <span class="n">observe</span> <span class="err">功能为监测数据的变化</span></code></pre></figure>
+
+<p>通过以上 Vue 源码部分查看，我们就能知道 Vue 框架是通过遍历数组 和递归遍历对象，从而达到利用 Object.defineProperty() 也能对对象和数组（部分方法的操作）进行监听。</p>
+
+<h2 id="7vue-怎么用-vmset-解决对象新增属性不能响应的问题-"><strong>7、</strong>Vue 怎么用 vm.$set() 解决对象新增属性不能响应的问题 ？</h2>
+
+<p>受现代 JavaScript 的限制 ，Vue <strong>无法检测到对象属性的添加或删除</strong>。由于 Vue 会在初始化实例时对属性执行 getter/setter 转化，所以属性必须在 data 对象上存在才能让 Vue 将它转换为响应式的。但是 Vue 提供了 <code class="highlighter-rouge">Vue.set (object, propertyName, value) / vm.$set (object, propertyName, value)</code> 来实现为对象添加响应式属性，那框架本身是如何实现的呢？</p>
+
+<p>我们查看对应的 Vue 源码：<code class="highlighter-rouge">vue/src/core/instance/index.js</code></p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">export</span> <span class="n">function</span> <span class="n">set</span> <span class="p">(</span><span class="ss">target: </span><span class="no">Array</span><span class="o">&lt;</span><span class="n">any</span><span class="o">&gt;</span> <span class="o">|</span> <span class="no">Object</span><span class="p">,</span> <span class="ss">key: </span><span class="n">any</span><span class="p">,</span> <span class="ss">val: </span><span class="n">any</span><span class="p">):</span> <span class="n">any</span> <span class="p">{</span>
+  <span class="sr">//</span> <span class="n">target</span> <span class="err">为数组</span>  
+  <span class="k">if</span> <span class="p">(</span><span class="no">Array</span><span class="p">.</span><span class="nf">isArray</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">isValidArrayIndex</span><span class="p">(</span><span class="n">key</span><span class="p">))</span> <span class="p">{</span>
+    <span class="sr">//</span> <span class="err">修改数组的长度</span><span class="p">,</span> <span class="err">避免索引</span><span class="o">&gt;</span><span class="err">数组长度导致</span><span class="n">splcie</span><span class="p">()</span><span class="err">执行有误</span>
+    <span class="n">target</span><span class="p">.</span><span class="nf">length</span> <span class="o">=</span> <span class="no">Math</span><span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="nf">length</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="sr">//</span> <span class="err">利用数组的</span><span class="n">splice</span><span class="err">变异方法触发响应式</span>  
+    <span class="n">target</span><span class="p">.</span><span class="nf">splice</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">val</span>
+  <span class="p">}</span>
+  <span class="sr">//</span> <span class="n">key</span> <span class="err">已经存在，直接修改属性值</span>  
+  <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="k">in</span> <span class="n">target</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="n">key</span> <span class="k">in</span> <span class="no">Object</span><span class="p">.</span><span class="nf">prototype</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">target</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="k">return</span> <span class="n">val</span>
+  <span class="p">}</span>
+  <span class="n">const</span> <span class="n">ob</span> <span class="o">=</span> <span class="p">(</span><span class="ss">target: </span><span class="n">any</span><span class="p">).</span><span class="nf">__ob__</span>
+  <span class="sr">//</span> <span class="n">target</span> <span class="err">本身就不是响应式数据</span><span class="p">,</span> <span class="err">直接赋值</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">ob</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">target</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="k">return</span> <span class="n">val</span>
+  <span class="p">}</span>
+  <span class="sr">//</span> <span class="err">对属性进行响应式处理</span>
+  <span class="n">defineReactive</span><span class="p">(</span><span class="n">ob</span><span class="p">.</span><span class="nf">value</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+  <span class="n">ob</span><span class="p">.</span><span class="nf">dep</span><span class="p">.</span><span class="nf">notify</span><span class="p">()</span>
+  <span class="k">return</span> <span class="n">val</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>我们阅读以上源码可知，vm.$set 的实现原理是：</p>
+
+<ul>
+  <li>
+    <p>如果目标是数组，直接使用数组的 splice 方法触发相应式；</p>
+  </li>
+  <li>
+    <p>如果目标是对象，会先判读属性是否存在、对象是否是响应式，最终如果要对属性进行响应式处理，则是通过调用 defineReactive 方法进行响应式处理（ defineReactive 方法就是 Vue 在初始化对象时，给对象属性采用 Object.defineProperty 动态添加 getter 和 setter 的功能所调用的方法）</p>
+  </li>
+</ul>
+
+<h2 id="8vue-中的-key-有什么作用"><strong>8、</strong>Vue 中的 key 有什么作用？**</h2>
+
+<p>key 是为 Vue 中 vnode 的唯一标记，通过这个 key，我们的 diff 操作可以更准确、更快速。Vue 的 diff 过程可以概括为：oldCh 和 newCh 各有两个头尾的变量 oldStartIndex、oldEndIndex 和 newStartIndex、newEndIndex，它们会新节点和旧节点会进行两两对比，即一共有4种比较方式：newStartIndex 和oldStartIndex 、newEndIndex 和 oldEndIndex 、newStartIndex 和 oldEndIndex 、newEndIndex 和 oldStartIndex，如果以上 4 种比较都没匹配，如果设置了key，就会用 key 再进行比较，在比较的过程中，遍历会往中间靠，一旦 StartIdx &gt; EndIdx 表明 oldCh 和 newCh 至少有一个已经遍历完了，就会结束比较。具体有无 key 的 diff 过程</p>
+
+<p>所以 Vue 中 key 的作用是：key 是为 Vue 中 vnode 的唯一标记，通过这个 key，我们的 diff 操作可以更准确、更快速</p>
+
+<p><strong>更准确</strong>：因为带 key 就不是就地复用了，在 sameNode 函数 <code class="highlighter-rouge">a.key === b.key</code> 对比中可以避免就地复用的情况。所以会更加准确。</p>
+
+<p><strong>更快速</strong>：利用 key 的唯一性生成 map 对象来获取对应节点，比遍历方式更快</p>
+
+:ET
