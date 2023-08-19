@@ -14,6 +14,19 @@ const userInfo = [
     },
     
 ]
+const jobInfo = [
+    {
+        title:'工作经历',
+        company:'公司名称',
+        workTime:'2018.5 - 2019.09',
+        tag:'工作',
+        detail:[
+            '负责开发公司（PC及移动端）的前端功能及交互效果的实现',
+            '配合后台工程师一起研讨技术实现方案，进行应用及系统整合',
+            '根据UI设计稿进行前端高保真实现'
+        ]
+    }
+]
 </script>
 
 <template>
@@ -21,13 +34,13 @@ const userInfo = [
     <div class="header">
         <div class="title" >
             <div class="name">吴洋</div>
-            <div class="job">Web前端开发工程师|深圳</div>
+            <div class="job">Web前端开发工程师 | 深圳</div>
         </div>
         <!-- 基本信息 -->
         <div 
         v-for="(item,index) in userInfo"
-         :key="index"
-         class="user-info"
+        :key="index"
+        class="user-info"
          >
             <div class="left-info">{{ item.leftInfo }}</div>
             <div class="right-info">{{ item.rightInfo }}</div>
@@ -35,18 +48,25 @@ const userInfo = [
     </div>
     <!-- 工作经历+项目经历 -->
     <div class="content">
-        <div>
-            <div>工作经历</div>
+        <div 
+        v-for="(item,index) in jobInfo" 
+        :key="index"
+        >
+            <div>{{item.title}}</div>
+            <div>
                 <div>
-                    <div>公司名称</div>
-                    <div>2019-22 --- xxxx</div>
+                    <div>{{item.company}}</div>
+                    <div>{{item.workTime}}</div>
                 </div>
-                <!-- 工作内容 -->
-                <div>
-                    <div>负责开发公司（PC及移动端）的前端功能及交互效果的实现</div>
-                    <div>配合后台工程师一起研讨技术实现方案，进行应用及系统整合</div>
-                    <div>根据UI设计稿进行前端高保真实现</div>
-                </div>
+                <div>{{ item.tag }}</div>
+            </div>
+            <div
+            v-for="detailItem in jobInfo.detail"
+            :key="detailItem"
+            >
+                <div>原点</div>
+                <div>{{detailItem}}</div>
+            </div>
         </div>
     </div>
 </template>
