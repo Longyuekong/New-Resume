@@ -1,3 +1,26 @@
-.test{
-    color: red;
+// 定义一些主题色，以及媒体查询
+
+.header {
+    width: 100%;
+    .title{
+        color: red;
+        .name{
+            color: red;
+
+        }
+        .job{
+            color: red;
+
+        }
+    }
+    .user-info{
+        .left-info{
+            color: red;
+
+        }
+        .right-info{
+            color: red;
+
+        }
+    }
 }
