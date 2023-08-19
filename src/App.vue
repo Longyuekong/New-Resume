@@ -1,11 +1,11 @@
 <script setup>
 const userInfo = [
     {
-        leftInfo:'男/1996.04',
-        rightInfo:'xxx.com/在线简历',
+        leftInfo:'男 / 1996.04',
+        rightInfo:'xxx.com / 在线简历',
     },
     {
-        leftInfo:'本科/北方民族大学',
+        leftInfo:'本科 / 北方民族大学',
         rightInfo:'627784964@qq.com',
     },
     {

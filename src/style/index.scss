@@ -1,26 +1,35 @@
 // 定义一些主题色，以及媒体查询
 
+$theme-color:#00b38a;
+$font-white:#fff;
 .header {
     width: 100%;
+    display: flex;
+    flex-direction: column;
     .title{
-        color: red;
+        display: flex;
+        border-bottom: 2px solid $theme-color ;
+        justify-content: space-between;
+        align-items: center;
         .name{
-            color: red;
-
+            font-size: 54px;
+            font-weight: 300;
         }
         .job{
-            color: red;
-
+            margin-top: 21px;
+            font-size: 24px;
         }
     }
     .user-info{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-size: 18px;
+        line-height: 30px;
         .left-info{
-            color: red;
 
         }
         .right-info{
-            color: red;
-
         }
     }
 }
