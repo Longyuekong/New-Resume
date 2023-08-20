@@ -15,7 +15,9 @@ const userInfo = [
     },
     
 ]
-const experienceConfig = [
+
+// 工作与技能
+const jobSkillConfig = [
     {
         title:'工作经历',
         experienceName:'OPPO',
@@ -48,11 +50,56 @@ const experienceConfig = [
             }
         ]
     },
+    {
+        title:'技能',
+        experienceName:'OPPO',
+        workTime:'2018.5 - 2019.09',
+        tag:'在职',
+        detail:[
+            {
+                detailTitle:'项目经历',
+                descArr:[
+                    '1111',
+                    '2222',
+                    '33333'
+                ]
+            }
+        ]
+    },
+]
+// 项目经历
+const experienceConfig = [
+    {
+        title:'项目经历',
+        experienceName:'OPPO',
+        workTime:'2018.5 - 2019.09',
+        tag:'在职',
+        detail:[
+            {
+                detailTitle:'项目描述',
+                descArr:[
+                    '1111',
+                    '2222',
+                    '33333'
+                ]
+            },
+            {
+                detailTitle:'主要工作',
+                descArr:[
+                    '1111',
+                    '2222',
+                    '33333'
+                ]
+            },
+        ]
+    },
+
 ]
 </script>
 
 <template>
-   <div class="container">
+<div class="container">
+    <div ref="section" class="section">
      <!-- 个人信息 -->
      <div class="header">
         <div class="title" >
@@ -71,9 +118,15 @@ const experienceConfig = [
     </div>
     <!-- 工作经历+项目经历 -->
     <div class="content">
+        <div class="left-side">
+        <Experience :experienceConfig="jobSkillConfig"></Experience>
+        </div>
+        <div class="right-side">
         <Experience :experienceConfig="experienceConfig"></Experience>
+        </div>
     </div>
    </div>
+</div>
 </template>
 
 <style scoped>
