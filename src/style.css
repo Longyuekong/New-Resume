@@ -14,15 +14,17 @@
 body {
   margin: 0;
   display: flex;
-  /* place-items: center; */
-  /* min-width: 320px; */
+  place-items: center;
+  min-width: 320px;
+  color: rgb(29, 29, 31);
   min-height: 100vh;
+  letter-spacing: 0em;
 }
 
 #app {
   /* max-width: 1280px; */
+  max-width: 1140px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
 }
 

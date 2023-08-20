@@ -1,35 +1,136 @@
 // 定义一些主题色，以及媒体查询
 
-$theme-color:#00b38a;
-$font-white:#fff;
-.header {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    .title{
+$theme-color: #00b38a;
+$font-white: #fff;
+$font-black: rgb(29, 29, 31);
+$font-gray: #ededed;
+
+.container {
+    width: 1200px;
+
+    .header {
+        width: 100%;
         display: flex;
-        border-bottom: 2px solid $theme-color ;
-        justify-content: space-between;
-        align-items: center;
-        .name{
-            font-size: 54px;
-            font-weight: 300;
+        flex-direction: column;
+        margin-bottom: 50px;
+
+        .title {
+            display: flex;
+            border-bottom: 2px solid $theme-color ;
+            justify-content: space-between;
+            align-items: center;
+
+            .name {
+                font-size: 54px;
+                font-weight: 300;
+            }
+
+            .job {
+                margin-top: 21px;
+                font-size: 24px;
+            }
         }
-        .job{
-            margin-top: 21px;
-            font-size: 24px;
+
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 18px;
+            line-height: 30px;
+
+            .left-info {}
+
+            .right-info {}
         }
     }
-    .user-info{
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-        font-size: 18px;
-        line-height: 30px;
-        .left-info{
 
+    .experience {
+        display: flex;
+        flex-direction: column;
+
+        .title-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .title-name {
+                color: $font-black;
+                font-size: 16px;
+                font-weight: 700;
+                margin: 0px 40px;
+            }
+
+            .line {
+                height: 2px;
+                background-color: $font-gray;
+                flex-grow: 1;
+            }
         }
-        .right-info{
+
+        .work-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .work-box {
+                display: flex;
+                flex-direction: column;
+
+                .work-title {
+                    font-size: 16px;
+                    font-weight: bolder;
+                    line-height: 24px;
+                }
+
+                .time {
+                    font-size: 14px;
+                    font-weight: bold;
+                    line-height: 20px;
+                }
+            }
+
+            .tag {
+                border: 1px solid $theme-color;
+                color: $theme-color;
+                border-radius: 3px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 14px;
+                line-height: 18px;
+                padding: 6px 10px;
+
+                &:hover {
+                    background-color: $theme-color;
+                    color: $font-white;
+                }
+            }
+        }
+
+        .detail {
+            margin-bottom: 20px;
+
+            .detail-box {
+                display: flex;
+                flex-direction: column;
+
+                .detail-title {
+                    font-size: 14px;
+                    margin-bottom: 6px;
+                }
+
+                .desc {
+                    display: flex;
+                    flex-direction: column;
+
+                    .desc-box {
+                        display: flex;
+                        margin-bottom: 6px;
+                    }
+                }
+            }
         }
     }
 }

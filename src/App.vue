@@ -1,4 +1,5 @@
 <script setup>
+import Experience from './components/Experience.vue';
 const userInfo = [
     {
         leftInfo:'男 / 1996.04',
@@ -14,24 +15,46 @@ const userInfo = [
     },
     
 ]
-const jobInfo = [
+const experienceConfig = [
     {
         title:'工作经历',
-        company:'公司名称',
+        experienceName:'OPPO',
         workTime:'2018.5 - 2019.09',
-        tag:'工作',
+        tag:'在职',
         detail:[
-            '负责开发公司（PC及移动端）的前端功能及交互效果的实现',
-            '配合后台工程师一起研讨技术实现方案，进行应用及系统整合',
-            '根据UI设计稿进行前端高保真实现'
+            {
+                detailTitle:'项目经历',
+                descArr:[
+                    '1111',
+                    '2222',
+                    '33333'
+                ]
+            }
         ]
-    }
+    },
+    {
+        title:'',
+        experienceName:'OPPO',
+        workTime:'2018.5 - 2019.09',
+        tag:'在职',
+        detail:[
+            {
+                detailTitle:'项目经历',
+                descArr:[
+                    '1111',
+                    '2222',
+                    '33333'
+                ]
+            }
+        ]
+    },
 ]
 </script>
 
 <template>
-    <!-- 个人信息 -->
-    <div class="header">
+   <div class="container">
+     <!-- 个人信息 -->
+     <div class="header">
         <div class="title" >
             <div class="name">吴洋</div>
             <div class="job">Web前端开发工程师 | 深圳</div>
@@ -48,27 +71,9 @@ const jobInfo = [
     </div>
     <!-- 工作经历+项目经历 -->
     <div class="content">
-        <div 
-        v-for="(item,index) in jobInfo" 
-        :key="index"
-        >
-            <div>{{item.title}}</div>
-            <div>
-                <div>
-                    <div>{{item.company}}</div>
-                    <div>{{item.workTime}}</div>
-                </div>
-                <div>{{ item.tag }}</div>
-            </div>
-            <div
-            v-for="detailItem in jobInfo.detail"
-            :key="detailItem"
-            >
-                <div>原点</div>
-                <div>{{detailItem}}</div>
-            </div>
-        </div>
+        <Experience :experienceConfig="experienceConfig"></Experience>
     </div>
+   </div>
 </template>
 
 <style scoped>
