@@ -95,11 +95,15 @@ const experienceConfig = [
     },
 
 ]
+const exportPDF = ()=>{
+    window.print()
+}
 </script>
 
 <template>
+    <div class="export-btn" @click="exportPDF">生成PDF</div>
 <div class="container">
-    <div ref="section" class="section">
+    <div  class="section">
      <!-- 个人信息 -->
      <div class="header">
         <div class="title" >
@@ -118,10 +122,10 @@ const experienceConfig = [
     </div>
     <!-- 工作经历+项目经历 -->
     <div class="content">
-        <div class="left-side">
+        <div >
         <Experience :experienceConfig="jobSkillConfig"></Experience>
         </div>
-        <div class="right-side">
+        <div >
         <Experience :experienceConfig="experienceConfig"></Experience>
         </div>
     </div>

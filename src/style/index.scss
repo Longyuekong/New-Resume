@@ -4,40 +4,127 @@ $theme-color: #00b38a;
 $font-white: #fff;
 $font-black: rgb(29, 29, 31);
 $font-gray: #ededed;
+$font-time:rgb(188 188 193);
+
+
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+}
+
+
+body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    letter-spacing: 0em;
+    background-color: $font-gray;
+    font-size: 62.5%;
+
+    @media print {
+        @page {
+            size: A4
+        }
+    }
+}
+
+
+
+.export-btn {
+    background-color: $theme-color;
+    color: $font-white;
+    padding: 10px;
+    position: fixed;
+    font-size: 12px;
+    border-radius: 4px;
+    @media screen and (max-width:720px) {
+        display: none;
+    }
+
+    @media print {
+        display: none;
+    }
+}
 
 .container {
     display: flex;
     justify-content: center;
-    background-color: #ededed;
-    height: 100vh;
+    background-color: $font-gray;
 
     .section {
         box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.15);
-        background-color: #fff;
-        width: 1200px;
-        padding: 40px;
-        margin: 20px 0px;
+        background-color: $font-white;
+        width: 794px;
+        // max-height: 1123px;
+        border-radius: 0px 0px 6px 6px;
+        transition: all 0.2s ease-in-out;
+        animation: fadeUp 2s cubic-bezier(0.19, 1, 0.22, 1);
+        @media print {
+            box-shadow: none;
+            border-radius: 0px;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 50px, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
 
         .header {
-            width: 100%;
             display: flex;
             flex-direction: column;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
+            background-color: $theme-color;
+            color: $font-white;
+            padding: 18px 24px 10px;
+            border-radius: 6px 6px 0px 0px;
+
+            @media print {
+                background-color: $font-white;
+                color: $font-black;
+                border-radius: 0px;
+                padding: 18px 24px 0px;
+
+            }
 
             .title {
                 display: flex;
-                border-bottom: 2px solid $theme-color ;
+                border-bottom: 1px solid $font-white ;
                 justify-content: space-between;
                 align-items: center;
+
+                @media print {
+                    border-bottom: 2px solid $theme-color ;
+
+                }
 
                 .name {
                     font-size: 54px;
                     font-weight: 300;
+                    @media screen and (max-width:720px) {
+                        font-size: 34px;
+                    }
+                 
                 }
 
                 .job {
                     margin-top: 21px;
                     font-size: 24px;
+                    @media screen and (max-width:720px) {
+                        font-size: 16px;
+                    }
                 }
             }
 
@@ -45,27 +132,26 @@ $font-gray: #ededed;
                 display: flex;
                 justify-content: space-between;
                 margin-top: 10px;
-                font-size: 18px;
-                line-height: 30px;
-
-                .left-info {}
-
-                .right-info {}
+                font-size: 16px;
+                line-height: 20px;
             }
         }
 
         .content {
-          display: flex;
-          .left-side {
-            width: 48%;
-            margin-right: 20px;
-          }
-          .right-side{
-            flex: 1;
-          }
+            display: grid;
+            padding: 0px 24px 0px;
+            grid-template-columns: repeat(2, 50%);
+            grid-template-rows: repeat(2, 50%);
+            grid-gap: 10px;
+
+            @media screen and (max-width:720px) {
+                grid-template-columns: auto;
+                grid-template-rows: auto;
+            }
             .experience {
                 display: flex;
                 flex-direction: column;
+
                 .title-box {
                     display: flex;
                     justify-content: space-between;
@@ -97,15 +183,14 @@ $font-gray: #ededed;
                         flex-direction: column;
 
                         .work-title {
-                            font-size: 16px;
+                            font-size: 14px;
+                            line-height: 16px;
                             font-weight: bolder;
-                            line-height: 24px;
                         }
 
                         .time {
-                            font-size: 14px;
-                            font-weight: bold;
-                            line-height: 20px;
+                            font-size: 12px;
+                            color: $font-time;
                         }
                     }
 
@@ -116,9 +201,9 @@ $font-gray: #ededed;
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        font-size: 14px;
-                        line-height: 18px;
-                        padding: 6px 10px;
+                        font-size: 12px;
+                        padding: 3px 10px;
+                        margin-bottom: 10px;
 
                         &:hover {
                             background-color: $theme-color;
@@ -129,6 +214,7 @@ $font-gray: #ededed;
 
                 .detail {
                     margin-bottom: 20px;
+
                     .detail-box {
                         display: flex;
                         flex-direction: column;
