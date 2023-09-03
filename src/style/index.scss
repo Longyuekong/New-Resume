@@ -25,7 +25,8 @@ body {
     min-height: 100vh;
     letter-spacing: 0em;
     background-color: $font-gray;
-    font-size: 62.5%;
+    display: flex;
+    justify-content: center;
 
     @media print {
         @page {
@@ -36,27 +37,29 @@ body {
 
 
 
-.export-btn {
-    background-color: $theme-color;
-    color: $font-white;
-    padding: 10px;
-    position: fixed;
-    font-size: 12px;
-    border-radius: 4px;
-    @media screen and (max-width:720px) {
-        display: none;
-    }
-
-    @media print {
-        display: none;
-    }
-}
 
 .container {
-    display: flex;
-    justify-content: center;
-    background-color: $font-gray;
-
+    margin-top: 40px;
+    @media print {
+        margin-top: 0px;
+    }
+    .export-btn {
+        background-color: $theme-color;
+        color: $font-white;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        font-size: 12px;
+        border-radius: 4px;
+        @media screen and (max-width:720px) {
+            display: none;
+        }
+        @media print {
+            display: none;
+        }
+    }
+    
     .section {
         box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.15);
         background-color: $font-white;
@@ -64,6 +67,7 @@ body {
         border-radius: 0px 0px 6px 6px;
         transition: all 0.2s ease-in-out;
         animation: fadeUp 2s cubic-bezier(0.19, 1, 0.22, 1);
+        
         @media print {
             box-shadow: none;
             border-radius: 0px;
@@ -106,7 +110,6 @@ body {
 
                 @media print {
                     border-bottom: 2px solid $theme-color ;
-
                 }
                 @media screen and (max-width:720px) {
                     flex-direction: column;
@@ -210,6 +213,7 @@ body {
                             font-size: 12px;
                             color: $font-time;
                         }
+                        
                     }
 
                     .tag {
@@ -221,17 +225,22 @@ body {
                         align-items: center;
                         font-size: 12px;
                         padding: 3px 10px;
-                        margin-bottom: 10px;
 
                         &:hover {
                             background-color: $theme-color;
                             color: $font-white;
                         }
+                        @media print {
+                            margin-right: 5px;
+                        }
+                    }
+                    .work-bottom{
+                        margin-bottom: 10px;
                     }
                 }
 
                 .detail {
-                    margin-bottom: 20px;
+                    margin-bottom: 10px;
 
                     .detail-box {
                         display: flex;
