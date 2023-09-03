@@ -32,7 +32,11 @@ jobs:
           npm run build
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: Deploy 
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:  # 自定义环境变量
+          ACCESS_TOKEN: ${{ secrets.New-Resume }} # secrets.VUE2_PC 是我的 secret 名称，需要替换成你的
+          BRANCH: master
+          FOLDER: docs
+          REPOSITORY_NAME: Longyuekong/New-Resume # 这是我的 github page 仓库
+          TARGET_FOLDER: / # 打包的文件将放到静态服务器 / 目录下
