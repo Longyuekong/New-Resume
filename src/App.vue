@@ -109,7 +109,7 @@ const exportPDF = ()=>{
 </script>
 
 <template>
-    <div class="export-btn" @click="exportPDF">生成PDF</div>
+    <div class="export-btn" @click="exportPDF">生成PDF文件</div>
 <div class="container">
     <div  class="section">
      <!-- 个人信息 -->
