@@ -4,7 +4,7 @@ $theme-color: #00b38a;
 $font-white: #fff;
 $font-black: rgb(29, 29, 31);
 $font-gray: #ededed;
-$font-time:rgb(188 188 193);
+$font-time: rgb(188 188 193);
 
 
 :root {
@@ -40,9 +40,11 @@ body {
 
 .container {
     margin-top: 40px;
+
     @media print {
         margin-top: 0px;
     }
+
     .export-btn {
         background-color: $theme-color;
         color: $font-white;
@@ -52,14 +54,16 @@ body {
         right: 0;
         font-size: 12px;
         border-radius: 4px;
+
         @media screen and (max-width:720px) {
             display: none;
         }
+
         @media print {
             display: none;
         }
     }
-    
+
     .section {
         box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.15);
         background-color: $font-white;
@@ -67,7 +71,7 @@ body {
         border-radius: 0px 0px 6px 6px;
         transition: all 0.2s ease-in-out;
         animation: fadeUp 2s cubic-bezier(0.19, 1, 0.22, 1);
-        
+
         @media print {
             box-shadow: none;
             border-radius: 0px;
@@ -111,6 +115,7 @@ body {
                 @media print {
                     border-bottom: 2px solid $theme-color ;
                 }
+
                 @media screen and (max-width:720px) {
                     flex-direction: column;
                     justify-content: flex-start;
@@ -119,15 +124,17 @@ body {
                 .name {
                     font-size: 54px;
                     font-weight: 300;
+
                     @media screen and (max-width:720px) {
                         font-size: 34px;
                     }
-                 
+
                 }
 
                 .job {
                     margin-top: 21px;
                     font-size: 24px;
+
                     @media screen and (max-width:720px) {
                         font-size: 18px;
                         margin: 10px 0px;
@@ -141,16 +148,17 @@ body {
                 margin-top: 10px;
                 font-size: 15px;
                 line-height: 20px;
+
                 @media screen and (max-width:720px) {
                     flex-direction: column;
                     justify-content: flex-start;
                     align-items: center;
                     font-size: 14px;
                 }
-                .left-info{
 
-                }
-                .right-info{
+                .left-info {}
+
+                .right-info {
                     @media screen and (max-width:720px) {
                         display: none;
                     }
@@ -169,6 +177,7 @@ body {
                 grid-template-columns: auto;
                 grid-template-rows: auto;
             }
+
             .experience {
                 display: flex;
                 flex-direction: column;
@@ -213,7 +222,7 @@ body {
                             font-size: 12px;
                             color: $font-time;
                         }
-                        
+
                     }
 
                     .tag {
@@ -230,11 +239,13 @@ body {
                             background-color: $theme-color;
                             color: $font-white;
                         }
+
                         @media print {
                             margin-right: 5px;
                         }
                     }
-                    .work-bottom{
+
+                    .work-bottom {
                         margin-bottom: 10px;
                     }
                 }

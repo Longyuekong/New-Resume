@@ -108,7 +108,7 @@ const jobSkillConfig = [
             },
         ]
     },
-   
+
 ]
 // OPPO内容审核 审核标准平台 考试平台
 // 三品牌全业务内容质量与安全工作，通过标准，流程，审核能力等多种手段，确保内容安全零风险
@@ -120,7 +120,7 @@ const jobSkillConfig = [
 // 为所有接入审核平台的业务制定安全合规，符合业务诉求可落地的执行标准，建立完善的全球内容安全管理体系，提高员工内容安全意识级别风险。消除内容安全风险
 // 项目经历
 const experienceConfig = [
-{
+    {
         title: '项目经历',
         experienceName: 'OPPO资源后台重构',
         workTime: '',
@@ -209,7 +209,7 @@ const experienceConfig = [
             },
         ]
     },
- 
+
 
 ]
 const exportPDF = () => {
@@ -219,7 +219,7 @@ const exportPDF = () => {
 
 <template>
     <div class="container">
-    <div class="export-btn" @click="exportPDF">生成PDF</div>
+        <div class="export-btn" @click="exportPDF">生成PDF</div>
         <div class="section">
             <!-- 个人信息 -->
             <div class="header">
