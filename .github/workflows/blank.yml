@@ -39,4 +39,3 @@ jobs:
           BRANCH: master
           FOLDER: docs
           REPOSITORY_NAME: Longyuekong/New-Resume # 这是我的 github page 仓库
-          TARGET_FOLDER: / # 打包的文件将放到静态服务器 / 目录下
