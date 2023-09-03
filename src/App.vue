@@ -3,15 +3,15 @@ import Experience from './components/Experience.vue';
 const userInfo = [
     {
         leftInfo:'男 / 1996.04',
-        rightInfo:'xxx.com / 在线简历',
+        rightInfo:'13649506209',
     },
     {
         leftInfo:'本科 / 北方民族大学',
         rightInfo:'627784964@qq.com',
     },
     {
-        leftInfo:'5年工作经验',
-        rightInfo:'13649506209',
+        leftInfo:'2014年毕业 / 4年工作经验',
+        rightInfo:'wyresume.top',
     },
     
 ]
@@ -20,48 +20,60 @@ const userInfo = [
 const jobSkillConfig = [
     {
         title:'工作经历',
-        experienceName:'OPPO',
-        workTime:'2018.5 - 2019.09',
+        experienceName:'武汉佰钧成技术有限责任公司',
+        workTime:'2019.10 - 至今',
         tag:'在职',
         detail:[
             {
-                detailTitle:'项目经历',
+                detailTitle:'工作内容',
                 descArr:[
-                    '1111',
-                    '2222',
-                    '33333'
+                    '负责OPPO内容审核，审核标准平台，考试平台的搭建、交互开发、维护和优化工作',
+                    '负责OPPO隐私安全平台以及广告负反馈H5（To C）的搭建、交互开发、维护和优化工作',
+                    '负责OPPO主题快应用小游戏审核平台的重构'
                 ]
             }
         ]
     },
     {
         title:'',
-        experienceName:'OPPO',
-        workTime:'2018.5 - 2019.09',
-        tag:'在职',
+        experienceName:'广州潮盟网络科技有限公司',
+        workTime:'2018.10 - 2019.08',
+        tag:'',
         detail:[
             {
-                detailTitle:'项目经历',
+                detailTitle:'工作内容',
                 descArr:[
-                    '1111',
-                    '2222',
-                    '33333'
+                    '负责公司客户管理模块的开发与维护',
                 ]
             }
         ]
     },
     {
-        title:'技能',
-        experienceName:'OPPO',
-        workTime:'2018.5 - 2019.09',
-        tag:'在职',
+        title:'个人能力',
+        experienceName:'Web',
+        workTime:'',
+        tag:'熟悉',
         detail:[
             {
-                detailTitle:'项目经历',
+                detailTitle:'',
                 descArr:[
-                    '1111',
-                    '2222',
-                    '33333'
+                    '熟练掌握Vue(2x，3x)框架以及周边生态库',
+                    '熟悉HTML5，CSS3，JavaScript(ES5/ES6/ES7)',
+                    '熟悉git使用，多人协作开发流程，抽离业务逻辑，封装公共组件'
+                ]
+            }
+        ]
+    },
+    {
+        title:'',
+        experienceName:'Web',
+        workTime:'',
+        tag:'了解',
+        detail:[
+            {
+                detailTitle:'',
+                descArr:[
+                    '了解React设计思想，HTTP协议，Node.js等技术',
                 ]
             }
         ]

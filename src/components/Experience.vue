@@ -24,7 +24,7 @@ const { experienceConfig } = toRefs(props)
                 <div class="work-title">{{ item.experienceName }}</div>
                 <div class="time" v-if="item.workTime">{{ item.workTime }}</div>
             </div>
-            <div class="tag">{{ item.tag }}</div>
+            <div v-show="item.tag" class="tag">{{ item.tag }}</div>
         </div>
         <div v-if="item.detail.length" class="detail">
             <div v-for="detailItem in item.detail" :key="detailItem" class="detail-box">
