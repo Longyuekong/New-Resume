@@ -13,6 +13,7 @@ const { experienceConfig } = toRefs(props)
 </script>
 
 <template>
+  <div>
     <div v-for="(item, index) in experienceConfig" :key="index" class="experience">
         <div v-if="item.title" class="title-box">
             <div class="line"></div>
@@ -38,5 +39,6 @@ const { experienceConfig } = toRefs(props)
             </div>
         </div>
     </div>
+  </div>
 </template>
 
