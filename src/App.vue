@@ -19,11 +19,25 @@ const userInfo = [
 // 为所有接入审核平台的业务制定安全合规，符合业务诉求可落地的执行标准，建立完善的全球内容安全管理体系，提高员工内容安全意识级别风险。消除内容安全风险
 // 工作与技能
 const jobSkillConfig = [
-    {
+{
         title: '工作经历',
-        experienceName: '佰均成技术有限责任公司',
-        workTime: '2019.10 - 至今',
+        experienceName: '时代微云科技有限公司',
+        workTime: '2023.11 - 至今',
         tag: '在职',
+        detail: [
+            {
+                detailTitle: '工作内容',
+                descArr: [
+                    '负责华东院BIM模型审查平台的开发与维护',
+                ]
+            }
+        ]
+    },
+    {
+        title: '',
+        experienceName: '佰均成技术有限责任公司',
+        workTime: '2019.10 - 2023.10',
+        tag: '',
         detail: [
             {
                 detailTitle: '工作内容',

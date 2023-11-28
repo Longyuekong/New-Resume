@@ -10,6 +10,8 @@
 
 # 使用
 1. git clone 
-2. npm i
+2. npm i 
 3. npm run dev
+
+node版本为18.18.2
 
